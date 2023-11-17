@@ -1,0 +1,32 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header nav {
+    width: fit-content;
+}
+
+.header nav ul {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.header nav ul li {
+    background-color: #6CE5E8;
+    padding: 6px 0;
+    width: 95px;
+    border-radius: 25px;
+    text-align: center;
+}

@@ -1,0 +1,80 @@
+
+h4 {
+    font-family: 'Inter';
+    font-size: 16px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 100;
+    color: #454545;
+    /* margin-bottom: 0%; */
+
+}
+
+.signup-button {
+    padding: 5px 25px;
+    border-radius: 20px;
+    background-color: #FECC0E;
+    border: 0;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Inter';
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.signup-button:hover {
+    opacity: 0.7;
+}
+
+.signup_area {
+    align-content: center;
+    /* border-radius: 0px; */
+    margin-bottom: 20px;
+    width: 315px;
+    height: fit-content;
+
+}
+
+.signup_input {
+    font-family: 'Inter';
+    font-size: 15px;
+    border: 1px #454545;
+    border-radius: 22px;
+    width: 100%;
+    /* width: 315px;
+    height: 35px; */
+    border: 1.5px solid #454545;
+    /* display: inline-block; */
+    padding: 11px 9px;
+
+}
+
+.signup_input::placeholder {
+    padding: 2px;
+}
+
+.invalid {
+    color: red;
+    font-size: 13px;
+
+}
+
+.bottomdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signtolog-button {
+    /* padding: 5px 10px 5px 10px; */
+    border: 0;
+    background-color: #F3F5F9;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    font-family: 'Inter';
+    font-size: 16px;
+    color: #454545;
+    cursor: pointer;
+    /* margin-top: 10px; */
+}
