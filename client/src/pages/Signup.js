@@ -21,8 +21,6 @@ export default function Signup() {
   //validate and post
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("pass")
-    console.info(values)
     const validationErrors = Validation(values);
     setErrors(validationErrors);
 

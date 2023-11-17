@@ -1,0 +1,140 @@
+.container {
+    max-width: 430px;
+    margin: 3rem auto;
+}
+
+.container h1 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.section {
+    padding: 0 0.5rem;
+}
+
+.section div {
+    width: 100%;
+}
+
+.section h2 {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.section h2 span {
+    font-size: 14px;
+}
+
+.section hr {
+    border: 1.5px solid #6CE5E8;
+    border-radius: 15px;
+}
+
+.section p {
+    font-size: 12px;
+    color: #7B7979;
+    text-align: center;
+    font-style: italic;
+}
+
+.section p span {
+    font-style: normal;
+    background-color: #7B7979;
+    color: #ffffff;
+    padding: 2px 5px;
+    border-radius: 5px;
+    margin-left: 3px;
+}
+
+.section label {
+    display: block;
+    margin: 5px 0;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+
+.section input,
+textarea {
+    border: 1.5px solid #6CE5E8;
+    border-radius: 5px;
+    width: 96%;
+    padding: 0.5rem;
+    margin-bottom: 8px;
+}
+
+.section input::placeholder,
+textarea::placeholder {
+    font-style: italic;
+    font-size: 12px;
+}
+
+.section textarea {
+    height: 60px;
+}
+
+.inline {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.inline input {
+    width: fit-content;
+    margin-left: 1rem;
+}
+
+.btn-con {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-con button {
+    background-color: #6CE5E8;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0.5rem 2.3rem;
+    text-align: center;
+    margin-top: 3rem;
+    cursor: pointer;
+}
+
+.btn-con button:active {
+    background-color: #4aacad;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 1rem;
+    justify-content: center;
+    margin: 0.7rem 0;
+}
+
+.tags button {
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 0.7rem;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 2px solid #F3F5F9;
+}
+
+.tags .selected {
+    border: 2px solid #454545;
+}
+
+.section div select {
+    border: 1.5px solid #6CE5E8;
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 8px;
+}

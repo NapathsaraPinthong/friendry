@@ -28,11 +28,8 @@ const Login = () => {
         if (response.data.length === 0) {
           alert("Student Id not found! Please sign up.");
         } else {
-          if (values.password === response.data[0].password) {
-            const { student_id, password } = values;
-            sessionStorage.setItem("Student_Id", student_id);
-            sessionStorage.setItem("Password", password);
-
+          if (Number(values.password) === response.data[0].password) {
+            sessionStorage.setItem("userID", values.student_id);
             navigate("/");
           } else {
             alert("Incorrect password")

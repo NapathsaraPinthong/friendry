@@ -1,5 +1,6 @@
 import './App.css';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ActivityList from './pages/ActivityList';
@@ -8,14 +9,16 @@ import CreateActivity from './pages/CreateActivity';
 import HostManage from './pages/HostManage';
 import EditActivity from './pages/EditActivity';
 import HostPage from './pages/HostPage';
+import AuthChecker from './components/AuthChecker';
 
 function App() {
+
   return (
     <div className="App">
       <div className="body-container">
         <BrowserRouter>
-        
           <Routes>
+            <Route element={<AuthChecker />} />
             <Route index element={<ActivityList />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />

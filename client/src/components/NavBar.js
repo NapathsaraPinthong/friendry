@@ -18,7 +18,9 @@ function NavBar() {
                         <Link to="/host">Create</Link>
                     </li>
                     <li>
-                        <Link to="/login">Logout</Link>
+                        <Link to="/login" onClick={() => {
+                            sessionStorage.setItem("userID", "");
+                        }}>Logout</Link>
                     </li>
                 </ul>
             </nav>

@@ -1,0 +1,118 @@
+.reciept {
+    background-color: #fff;
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    box-shadow: 1px 2px 5px #6CE5E8;
+}
+
+.top-inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-inline h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.top-inline span {
+    background-color: #188487;
+    color: #fff;
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+
+.activity-detail p {
+    margin: 0.9rem 0;
+}
+
+
+.bottom-inline {
+    display: flex;
+    justify-content: space-between;
+    color: #7B7979;
+    font-size: 14px;
+    margin-bottom: 1rem;
+}
+
+.reciept hr {
+    border: 1.5px solid #6CE5E8;
+    border-radius: 15px;
+}
+
+.group-inline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    color: #7B7979;
+}
+
+.group-inline h4 {
+    margin: 0;
+    color: #454545;
+    font-weight: 500;
+}
+
+.capacity .bold {
+    font-weight: 800;
+    color: #454545;
+}
+
+.member-con {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 0.8rem;
+    padding-left: 0.5rem;
+}
+
+.member-con div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 2.2rem;
+}
+
+.btn-div button {
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    padding: 0.5rem 3rem;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.btn-blue {
+    background-color: #6CE5E8;
+}
+
+.btn-blue:active {
+    background-color: #4aacad;
+}
+
+.btn-red {
+    background-color: #E74B5B;
+}
+
+.btn-red:active {
+    background-color: #b33f4a;
+}
+
+.details {
+    font-size: 14px;
+    color: #7B7979;
+    text-align: center;
+    margin-top: 1rem;
+    font-style: italic;
+}
