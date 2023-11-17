@@ -1,0 +1,181 @@
+
+.list-header {
+    display: sticky;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+.list-header h1 {
+    font-size: 25px;
+    font-weight: 600;
+    text-wrap: nowrap;
+    text-align: center;
+    color: #454545;
+}
+
+.container h1 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.btn button {
+    background-color: #6CE5E8;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0.3rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.btn button:active {
+    background-color: #4aacad;
+}
+
+.tags-filter ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    white-space: nowrap;
+    list-style-type: none;
+    padding: 0;
+}
+
+
+
+.tags-filter button {
+    background-color: transparent;
+    color: #188487;
+    border: 2px solid #188487;
+    border-radius: 25px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 0.2rem 0.8rem;
+    text-align: center;
+    cursor: pointer;
+    margin: 1rem 0.15rem;
+}
+
+.tags-filter button:hover {
+    background-color: #4aacad;
+}
+
+.tags-filter button:disabled {
+    background-color: #188487;
+    color: #ffffff;
+}
+
+.activity-list {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    padding: 0.3rem 1rem;
+    cursor: pointer;
+    margin: 1rem 0.5rem;
+    height: 8rem;
+}
+
+#joined p {
+    font-size: 10px;
+    font-style: italic;
+    text-align: center;
+}
+
+#current {
+    background-color: #ffffff;
+    border: 5px solid #6CE5E8;
+}
+
+#joined :hover {
+    background-color: #F3F5F9;
+}
+
+#joinStatus {
+    float: right;
+    color: #6CE5E8;
+    font-size: 20px;
+    margin-top: 1.2rem;
+}
+
+.activity-list h1 {
+    float: right;
+    font-size: 24px;
+    font-weight: 600;
+    color: #7B7979;
+    margin: 0.2rem 0.2rem;
+}
+
+.activity-list h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #454545;
+    margin: 0.2rem 0.2rem;
+}
+
+.activity-list h3 {
+    font-size: 10px;
+    font-weight: 600;
+    color: #7B7979;
+    margin: 0 0.2rem;
+}
+
+.activity-list .tags {
+    display: inline-block;
+    justify-content: center;
+    margin: 0.5rem 0;
+    background-color: #188487;
+    color: #ffffff;
+    border: transparent;
+    padding: 0.3rem 0.4rem;
+    border-radius: 10px;
+    font-size: 8px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.activity-list .location {
+    float: right;
+    flex-wrap: wrap;
+    font-size: 14px;
+    margin: 0.5rem 0;
+    color: #7B7979;
+}
+
+.btn-join button {
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+    background-color: #6CE5E8;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0.3rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    margin: 1rem 0 0.5rem 0;
+}
+
+.btn-join button:active {
+    background-color: #4aacad;
+}
+
+.btn-join button:disabled {
+    background-color: #454545;
+}
+
+.bottom-text {
+    font-size: 12px;
+    text-align: center;
+}

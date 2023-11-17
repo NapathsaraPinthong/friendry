@@ -311,6 +311,101 @@ app.get("/host/group/:id", async (req, res) => {
 });
 
 
+//Activity List page
+app.get("/activitylist", async (req, res) => {
+    db.query(
+        "SELECT a.activityID, a.name, a.category, a.capacity, a.description, a.location, l.name as RoomName, l.address, COUNT(*) as Current FROM activity a JOIN activitygroup g ON a.activityID = g.activityID JOIN location l ON l.roomID = a.location GROUP BY a.activityID;",
+        (err, results) => {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.send(results);
+            }
+        });
+});
+
+app.get("/activitygroup/:id", async (req, res) => {
+
+    const userID = req.params.id;
+
+    db.query(
+        "SELECT a.ActivityID, a.Name, a.Category, a.Capacity, a.Description, a.location, l.Name as RoomName, l.Address, COUNT(*) as Current FROM activity a JOIN activitygroup g ON a.ActivityID = g.ActivityID JOIN location l ON l.RoomID = a.location WHERE a.ActivityID IN (SELECT ActivityID from activitygroup WHERE StudentID = ?) GROUP BY a.ActivityID;", [userID],
+        (err, results) => {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.send(results);
+            }
+        });
+});
+
+app.post("/join", async (req, res) => {
+    const { activityID, userID } = req.body;
+    try {
+        db.query(
+            "INSERT INTO activitygroup (studentID, activityID) VALUES(?,?)",
+            [userID, activityID],
+            (err, results, fields) => {
+                if (err) {
+                    console.error('Error while inserting a user into the database', err);
+                    return res.status(400).send();
+                } else {
+                    return res.status(201).json({ message: "Join the activity succesfully" })
+                }
+            }
+        )
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send();
+    }
+});
+
+//Join activity page
+app.get("/activity/:id", async (req, res) => {
+
+    const userID = req.params.id;
+
+    try {
+        db.query(
+            "SELECT a.Name, a.Description, a.Category, a.Capacity, l.Name as Room, l.Address as Address, u.FirstName as HostFirstName, u.LastName as HostLastName FROM activity a JOIN location l ON a.RoomID = l.RoomID JOIN activitygroup g ON g.ActivityID = a.ActivityID JOIN user u ON u.StudentID = a.HostID WHERE g.StudentID = ?", [userID],
+            (err, results, fields) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(400).send();
+                }
+                res.status(200).json(results);
+            }
+        )
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send();
+    }
+});
+
+app.delete("/leave/:id", async (req, res) => {
+
+    const userID = req.params.id;
+    try {
+        db.query(
+            "DELETE FROM activitygroup WHERE StudentID = ?", [userID],
+            (err, results, fields) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(400).send();
+                }
+                if (results.affectedRows === 0) {
+                    return res.status(404).json({ message: "Error leaving activity" });
+                }
+                res.status(200).json(results);
+            })
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send();
+    }
+});
+
 app.listen(3001, () => {
     console.log('Server is running on port 3001');
 })
