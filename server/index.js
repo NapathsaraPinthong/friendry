@@ -295,7 +295,7 @@ app.get("/host/group/:id", async (req, res) => {
 
     try {
         db.query(
-            "SELECT u.fname, u.lname FROM users u JOIN activitygroup ag ON u.student_id = ag.studentID JOIN activity a ON a.activityID = ag.activityID WHERE a.hostID = ?", [hostID],
+            "SELECT u.student_id, u.fname, u.lname FROM users u JOIN activitygroup ag ON u.student_id = ag.studentID JOIN activity a ON a.activityID = ag.activityID WHERE a.hostID = ?", [hostID],
             (err, results, feilds) => {
                 if (err) {
                     console.log(err);
@@ -369,7 +369,7 @@ app.get("/activity/:id", async (req, res) => {
 
     try {
         db.query(
-            "SELECT a.Name, a.Description, a.Category, a.Capacity, l.Name as Room, l.Address as Address, u.FirstName as HostFirstName, u.LastName as HostLastName FROM activity a JOIN location l ON a.RoomID = l.RoomID JOIN activitygroup g ON g.ActivityID = a.ActivityID JOIN user u ON u.StudentID = a.HostID WHERE g.StudentID = ?", [userID],
+            "SELECT a.Name, a.Description, a.Category, a.Capacity, l.Name as Room, l.Address as Address, u.fname as HostFirstName, u.lname as HostLastName FROM activity a JOIN location l ON a.location = l.RoomID JOIN activitygroup g ON g.ActivityID = a.ActivityID JOIN users u ON u.student_id = a.HostID WHERE g.StudentID = ?", [userID],
             (err, results, fields) => {
                 if (err) {
                     console.log(err);

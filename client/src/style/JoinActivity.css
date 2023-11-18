@@ -1,0 +1,73 @@
+.joining-header {
+    position: relative;
+}
+
+.joining-header .image {
+    margin: 3rem 5rem 1rem;
+}
+
+.joining-detail {
+    background-color: #ffffff;
+    border: transparent;
+    border-radius: 25px;
+    padding: 0.5rem 2rem;
+}
+
+.joining-detail .tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem 0 0 0;
+    background-color: #188487;
+    color: #ffffff;
+    border: none;
+    padding: 0.3rem 0.4rem;
+    border-radius: 10px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 2px solid #F3F5F9;
+    width: fit-content;
+}
+
+.joining-detail h2 {
+    margin: 2.5rem 0 0.5rem 0;
+}
+
+.joining-detail h3 {
+    margin: 0.5rem 0;
+}
+
+#location {
+    font-weight: 600;
+    margin: 0 0;
+}
+
+#description {
+    font-weight: 300;
+    margin: 0 0;
+}
+
+#host {
+    font-weight: 600;
+    margin: 1.5rem 0;
+}
+
+.joining-detail .btn-cancel button {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    background-color: #E74B5B;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0.5rem 2.3rem;
+    text-align: center;
+    margin: 3rem 7rem 1rem;
+    cursor: pointer;
+}
+
+.joining-detail .btn-cancel button:hover {
+    background-color: #c51325;
+}

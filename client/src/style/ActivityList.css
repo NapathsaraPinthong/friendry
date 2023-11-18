@@ -1,4 +1,3 @@
-
 .list-header {
     display: sticky;
     justify-content: space-between;
@@ -11,6 +10,7 @@
     text-wrap: nowrap;
     text-align: center;
     color: #454545;
+    margin-bottom: 2rem;
 }
 
 .container h1 {
@@ -42,16 +42,30 @@
     background-color: #4aacad;
 }
 
+.tags-filter nav {
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-bottom: 3rem;
+}
+
+.tags-filter nav::-webkit-scrollbar {
+    height: 4px;
+    background-color: #dedede;
+    border-radius: 6px;
+}
+
+.tags-filter nav::-webkit-scrollbar-thumb {
+    background-color: #7B7979;
+    border-radius: 6px;
+}
+
 .tags-filter ul {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    white-space: nowrap;
     list-style-type: none;
     padding: 0;
+    gap: 0.5rem;
 }
-
-
 
 .tags-filter button {
     background-color: transparent;
@@ -63,7 +77,6 @@
     padding: 0.2rem 0.8rem;
     text-align: center;
     cursor: pointer;
-    margin: 1rem 0.15rem;
 }
 
 .tags-filter button:hover {
@@ -79,9 +92,9 @@
     background-color: #ffffff;
     border: none;
     border-radius: 15px;
-    padding: 0.3rem 1rem;
+    padding: 0.5rem 1rem;
     cursor: pointer;
-    margin: 1rem 0.5rem;
+    margin: 1.5rem 0.5rem;
     height: 8rem;
 }
 
@@ -123,8 +136,8 @@
 }
 
 .activity-list h3 {
-    font-size: 10px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     color: #7B7979;
     margin: 0 0.2rem;
 }
@@ -136,11 +149,12 @@
     background-color: #188487;
     color: #ffffff;
     border: transparent;
-    padding: 0.3rem 0.4rem;
-    border-radius: 10px;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
     font-size: 8px;
     cursor: pointer;
     width: fit-content;
+    font-size: 12px;
 }
 
 .activity-list .location {
@@ -176,6 +190,21 @@
 }
 
 .bottom-text {
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
+}
+
+.bottom-text button {
+    border: 2px solid #6CE5E8;
+    border-radius: 30px;
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    font-weight: 600;
+    color: #188487;
+    cursor: pointer;
+}
+
+.bottom-text button:hover {
+    background-color: #6CE5E8;
+    color: #ffffff;
 }

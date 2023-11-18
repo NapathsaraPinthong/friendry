@@ -7,19 +7,20 @@ function HostPage() {
   const userID = sessionStorage.getItem('userID');
   const navigate = useNavigate();
 
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const response = await Axios.get('http://localhost:3001/hosts');
-      const hostsData = response.data.map((val) => val.hostID);
+      const host_response = await Axios.get('http://localhost:3001/hosts');
+      const hostsData = host_response.data.map((val) => val.hostID);
 
       if (userID && hostsData.includes(Number(userID))) {
         setRedirect('/manage');
       } else {
-        setRedirect('/create');
+        setRedirect('/create')
       }
     } catch (error) {
       console.log(error);

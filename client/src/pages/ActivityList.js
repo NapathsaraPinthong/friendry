@@ -12,10 +12,20 @@ function ActivityList() {
   const [tagFilter, setTagFilter] = useState("All");
   const [checkJoin, setcheckJoin] = useState(false);
   const [currentActivity, setCurrentActivity] = useState(null);
-
+  const [hosts, setHosts] = useState([]);
 
   const userID = sessionStorage.getItem("userID");
   const navigate = useNavigate();
+
+  const [disabledButtons, setDisabledButtons] = useState({
+    All: false,
+    Boardgame: false,
+    Language: false,
+    "Movie Talk": false,
+    "Book Talk": false,
+    "Talk on topic": false,
+    "Watching Movie": false,
+  });
 
   useEffect(() => {
     if (userID === "") {
@@ -28,6 +38,8 @@ function ActivityList() {
   const fetchData = async () => {
     try {
       const activitygroup_check = await Axios.get(`http://localhost:3001/activitygroup/${userID}`);
+      const host_response = await Axios.get('http://localhost:3001/hosts');
+      setHosts(host_response.data.map((val) => val.hostID));
       // User is not in the activitygroup, hide the join button 
       if (activitygroup_check.data[0]) {
         setcheckJoin(true);
@@ -40,7 +52,16 @@ function ActivityList() {
 
       const activity_response = await Axios.get(`http://localhost:3001/activitylist`);
       setActivity(activity_response.data);
-      document.getElementById(tagFilter).disabled = true;
+
+      // Disable buttons based on tagFilter
+      const disabledButtonsCopy = { ...disabledButtons };
+      Object.keys(disabledButtonsCopy).forEach((button) => {
+        disabledButtonsCopy[button] = false;
+      });
+      disabledButtonsCopy[tagFilter] = true;
+      setDisabledButtons(disabledButtonsCopy);
+
+      console.log(tagFilter);
 
     } catch (error) {
       console.log(error);
@@ -55,13 +76,6 @@ function ActivityList() {
 
   const handleFilterClick = (event) => {
     event.preventDefault();
-    document.getElementById("All").disabled = false;
-    document.getElementById("Book Talk").disabled = false;
-    document.getElementById("Board Game").disabled = false;
-    document.getElementById("Politics").disabled = false;
-    document.getElementById("Language").disabled = false;
-
-    document.getElementById(event.target.id).disabled = true;
     setTagFilter(event.target.id);
   }
 
@@ -84,6 +98,11 @@ function ActivityList() {
 
   const linkJoinPage = () => {
     navigate('/join');
+    if (userID && hosts.includes(Number(userID))) {
+      navigate('/manage');
+    } else {
+      navigate('/join');
+    }
   }
 
   return (
@@ -95,23 +114,30 @@ function ActivityList() {
           <div />
 
           <div className='tags-filter'>
-
             <nav>
               <ul>
                 <li>
-                  <button onClick={handleFilterClick} id='All'>All</button>
+                  <button onClick={handleFilterClick} id='All' 
+                    disabled={disabledButtons['All']}>All</button>
                 </li>
                 <li>
-                  <button onClick={handleFilterClick} id='Book Talk'>Book Talk</button>
+                  <button onClick={handleFilterClick} id='Boardgame'
+                    disabled={disabledButtons['Boardgame']}>Board Game</button>
                 </li>
                 <li>
-                  <button onClick={handleFilterClick} id='Board Game'>Board Game</button>
+                  <button onClick={handleFilterClick} id='Language' disabled={disabledButtons['Language']}>Language</button>
                 </li>
                 <li>
-                  <button onClick={handleFilterClick} id='Politics'>Politics</button>
+                  <button onClick={handleFilterClick} id='Movie Talk' disabled={disabledButtons['Movie Talk']}>Movie Talk</button>
                 </li>
                 <li>
-                  <button onClick={handleFilterClick} id='Language'>Language</button>
+                  <button onClick={handleFilterClick} id='Book Talk' disabled={disabledButtons['Book Talk']}>Book Talk</button>
+                </li>
+                <li>
+                  <button onClick={handleFilterClick} id='Talk on Topic' disabled={disabledButtons['Talk on Topic']}>Talk on Topic</button>
+                </li>
+                <li>
+                  <button onClick={handleFilterClick} id='Watching Movie' disabled={disabledButtons['Watching Movie']}>Watching Movie</button>
                 </li>
               </ul>
             </nav>
@@ -131,23 +157,24 @@ function ActivityList() {
                 <p>** If you want to join other activities, please cancel the current one first **</p>
               </div>)
             }
-            {activity
-              .filter(val => currentActivity === null || currentActivity.ActivityID !== val.ActivityID)
+            {activity.length > 0 && activity
+              .filter(val => currentActivity === null || currentActivity.ActivityID !== val.activityID)
               .map((val, key) => {
                 var btnStatus = false;
-                if (val.Current >= val.Capacity)
+                {console.log(val.category)}
+                if (val.Current >= val.capacity)
                   btnStatus = true;
-                if (val.Category === tagFilter || tagFilter === 'All') {
+                if (val.category === tagFilter || tagFilter === 'All') {
                   return (
                     <div className='activity-list' key={key}>
-                      <div className='tags'>{val.Category}</div>
-                      <div className='location'>{val.Address}, {val.RoomName}</div><br></br>
-                      <h1><b>{val.Current}</b>/{val.Capacity}</h1>
-                      <h2>{val.Name}</h2>
-                      <h3>{val.Description}</h3>
+                      <div className='tags'>{val.category}</div>
+                      <div className='location'>{val.address}, {val.RoomName}</div><br></br>
+                      <h1><b>{val.Current}</b>/{val.capacity}</h1>
+                      <h2>{val.name}</h2>
+                      <h3>{val.description}</h3>
                       <div className='btn-join'>
                         {!checkJoin &&
-                          (<button onClick={handleJoinClick} value={val.ActivityID} disabled={btnStatus}>Join</button>)
+                          (<button onClick={handleJoinClick} value={val.activityID} disabled={btnStatus}>Join</button>)
                         }</div>
                     </div>
                   )

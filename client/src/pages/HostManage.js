@@ -82,9 +82,18 @@ function HostManage() {
             </div>
 
             <div className='member-con'>
-              {members.map((val, key) => {
+              <div>
+                <img src={pic} width="25" />
+                <span>You</span>
+              </div>
+              {members
+              .filter((val) => val.student_id != hostID)
+              .map((val, key) => {
                 return (
-                  <div key={key}><img src={pic} width="25" />{val.fname} {val.lname}</div>
+                  <div key={key}>
+                    <img src={pic} width="25" />
+                    <span>{val.fname} {val.lname}</span>
+                  </div>
                 )
               })}
             </div>

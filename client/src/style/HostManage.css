@@ -48,12 +48,14 @@
     justify-content: space-between;
     margin-top: 1rem;
     color: #7B7979;
+    font-size: 18px;
 }
 
 .group-inline h4 {
     margin: 0;
     color: #454545;
     font-weight: 500;
+    
 }
 
 .capacity .bold {
@@ -63,16 +65,20 @@
 
 .member-con {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 14px;
     margin-top: 0.8rem;
-    padding-left: 0.5rem;
+    padding-left: 0.7rem;
 }
 
 .member-con div {
     display: flex;
     align-items: center;
     gap: 6px;
+}
+
+.member-con div span {
+    text-wrap: nowrap;
 }
 
 .btn-div {

@@ -81,16 +81,26 @@ function EditActivity() {
     event.preventDefault();
 
     try {
-      await Axios.patch(`http://localhost:3001/update-activity/${activityID}`, dataBody);
-      await Axios.patch('http://localhost:3001/equipment/cancel', { code: oldEquipment });
-      await Axios.patch('http://localhost:3001/location/reserve', { roomID: location });
-      await Axios.patch('http://localhost:3001/equipment/reserve', { code: equipment });
-      console.log('Activity updated successfully!');
-      navigate('/manage');
+      const memberResponse = await Axios.get(`http://localhost:3001/host/group/${hostID}`);
+      const currentMembers = memberResponse.data.length;
+
+      if (capacity < currentMembers) {
+        alert('Cannot update capacity to a value lower than the current number of members.');
+        fetchData();
+      } else {
+
+        await Axios.patch(`http://localhost:3001/update-activity/${activityID}`, dataBody);
+        await Axios.patch('http://localhost:3001/equipment/cancel', { code: oldEquipment });
+        await Axios.patch('http://localhost:3001/location/reserve', { roomID: location });
+        await Axios.patch('http://localhost:3001/equipment/reserve', { code: equipment });
+        console.log('Activity updated successfully!');
+        navigate('/manage');
+      }
     } catch (error) {
       console.error('Error while updating activity:', error);
     }
   };
+
 
   const handleCancel = async () => {
     await Axios.patch('http://localhost:3001/location/reserve', { roomID: oldLocation });

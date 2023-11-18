@@ -19,6 +19,7 @@ function CreateActivity() {
 
   const hostID = sessionStorage.getItem("userID");
   const [hosts, setHosts] = useState([]);
+  const [inActivityGroup, setInActivityGroup] = useState(false);
 
 
   useEffect(() => {
@@ -38,6 +39,11 @@ function CreateActivity() {
       setHosts(hostsData);
       setLocationList(location_response.data);
       setEquipmentList(equipment_response.data);
+
+      const activitygroup_check = await Axios.get(`http://localhost:3001/activitygroup/${hostID}`);
+      if (activitygroup_check.data[0]) {
+        setInActivityGroup(true);
+      }
 
     } catch (error) {
       console.log(error);
@@ -83,30 +89,48 @@ function CreateActivity() {
     }
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!name || !category || !capacity || !location || !equipment) {
       alert("Please complete all required fields.");
     } else {
-      addActivity();
-      setName("");
-      setCategory("");
-      setCapacity(2);
-      setDescription("");
-      setLocation(0);
-      setEquipment(0);
+      try {
+        await addActivity();
+        const activity_response = await Axios.get(`http://localhost:3001/host/activity/${hostID}`);
+
+        if (activity_response.data && activity_response.data.length > 0) {
+          const activityID = activity_response.data[0].activityID;
+          await Axios.post('http://localhost:3001/join', { activityID: activityID, userID: hostID });
+          setName("");
+          setCategory("");
+          setCapacity(2);
+          setDescription("");
+          setLocation(0);
+          setEquipment(0);
+        } else {
+          console.log("Activity data not found.");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
   if (hostID && hosts.includes(Number(hostID))) {
-    navigate('/group');
+    navigate('/manage');
   } else {
     return (
       <div>
         <NavBar />
         <div className='container'>
           <h1>Create Activity</h1>
+          {inActivityGroup && (
+            <div className="warning-message">
+              <p>** You are already part of an activity group <br></br> You cannot create a new activity at the moment **</p>
+            </div>
+          )}
+          {!inActivityGroup && (
           <form>
             <div className='section'>
               <h2>Choose tag(s) <span>that best describe your activity</span></h2>
@@ -212,7 +236,8 @@ function CreateActivity() {
             <div className="btn-con">
               <button onClick={handleSubmit}>Create</button>
             </div>
-          </form>
+          </form> 
+          )}
         </div>
       </div>
 
