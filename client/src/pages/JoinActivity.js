@@ -14,7 +14,7 @@ function JoinActivity() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userID === "") {
+    if (!userID || userID === "") {
       navigate('/login');
     } else {
       fetchData();

@@ -28,7 +28,7 @@ function ActivityList() {
   });
 
   useEffect(() => {
-    if (userID === "") {
+    if (!userID || userID === "") {
       navigate('/login');
     } else {
       fetchData();
@@ -60,8 +60,6 @@ function ActivityList() {
       });
       disabledButtonsCopy[tagFilter] = true;
       setDisabledButtons(disabledButtonsCopy);
-
-      console.log(tagFilter);
 
     } catch (error) {
       console.log(error);
