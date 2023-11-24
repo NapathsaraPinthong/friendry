@@ -16,7 +16,7 @@ function Validation(values) {
         errors.password = "Password is required"
     }
     else if (!password_valid.test(values.password)) {
-        errors.password = "Password must be at least 8 digits"
+        errors.password = "Password must be number at least 8 digits"
     } else {
         errors.password = ""
     }

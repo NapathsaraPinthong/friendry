@@ -9,7 +9,6 @@ import CreateActivity from './pages/CreateActivity';
 import HostManage from './pages/HostManage';
 import EditActivity from './pages/EditActivity';
 import HostPage from './pages/HostPage';
-import AuthChecker from './components/AuthChecker';
 
 function App() {
 
@@ -18,7 +17,6 @@ function App() {
       <div className="body-container">
         <BrowserRouter>
           <Routes>
-            <Route element={<AuthChecker />} />
             <Route index element={<ActivityList />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />

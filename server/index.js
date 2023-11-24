@@ -2,14 +2,16 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
+const saltRounds = 10; 
 
 app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-    user: "root",
+    user: "napathsara",
     host: "localhost",
-    password: "root",
+    password: "6422782555",
     database: "friendry",
     port: '3306'
 })
@@ -26,21 +28,27 @@ db.connect((err) => {
 
 app.post('/signup', async (req, res) => {
     const { student_id, fname, lname, password } = req.body;
-    const sql = "INSERT INTO users (student_id, fname, lname, password) VALUES (?,?,?,?)";
-    try {
-        db.query(sql, [student_id, fname, lname, password],
-            (err, results, field) => {
+    bcrypt.hash(password, saltRounds, async (err, hash) => {
+        if (err) {
+            console.log("Error while hashing the password");
+            return res.status(500).send();
+        }
+        const sql = "INSERT INTO users (student_id, fname, lname, password) VALUES (?,?,?,?)";
+        try {
+            db.query(sql, [student_id, fname, lname, hash], (err, results, field) => {
                 if (err) {
-                    console.log("error while inserting");
+                    console.log("Error while inserting");
+                    console.log(hash);
+
                     return res.status(400).send();
                 }
                 return res.status(201).json({ message: "inserted successfully" });
             })
-    } catch (err) {
-        console.log(err);
-        return res.status(500).send();
-    }
-
+        } catch (err) {
+            console.log(err);
+            return res.status(500).send();
+        }
+    });
 });
 
 app.get("/login/:id", async (req, res) => {

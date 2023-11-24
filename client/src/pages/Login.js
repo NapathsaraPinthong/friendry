@@ -4,6 +4,8 @@ import Validation from "../LoginValidate"
 import { useState } from "react"
 import axios from "axios"
 import logo from '../asset/logo.png'
+import bcrypt from 'bcryptjs';
+
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -24,21 +26,27 @@ const Login = () => {
 
         const response = await axios.get(`http://localhost:3001/login/${values.student_id}`)
 
-
         if (response.data.length === 0) {
           alert("Student Id not found! Please sign up.");
         } else {
-          if (Number(values.password) === response.data[0].password) {
-            sessionStorage.setItem("userID", values.student_id);
-            navigate("/");
-          } else {
-            alert("Incorrect password")
-          }
+          bcrypt.compare(values.password, response.data[0].password, (err, result) => {
+            if (err) {
+              console.error(err);
+              return; // Handle error accordingly
+            }
+            if (result) {
+              // Passwords match
+              sessionStorage.setItem("userID", values.student_id);
+              navigate("/");
+            } else {
+              // Passwords don't match
+              alert("Incorrect password");
+            }
+          });
         }
 
       } catch (err) {
         alert("Log in failed! Please check your Student Id and Password.");
-
       }
     }
   }
