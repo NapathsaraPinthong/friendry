@@ -10,7 +10,7 @@ function CreateActivity() {
 
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-  const [capacity, setCapacity] = useState(0);
+  const [capacity, setCapacity] = useState(2);
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState(0);
   const [locationList, setLocationList] = useState([]);
@@ -65,14 +65,6 @@ function CreateActivity() {
     setEquipment(selectedCode);
   };
 
-  const handleCapacityChange = (event) => {
-    const selectedCapacity = event.target.value;
-    if (selectedCapacity < 2 || selectedCapacity > 30) {
-      alert('Please enter a number between 2 and 30.');
-    } else {
-      setCapacity(selectedCapacity);
-    }
-  };
 
   const data_body = {
     name: name,
@@ -103,7 +95,10 @@ function CreateActivity() {
 
     if (!name || !category || !capacity || !location || !equipment) {
       alert("Please complete all required fields.");
-    } else {
+    } else if ( capacity < 2 || capacity > 30) {
+      alert("Number of participants must be between 2 and 30.");
+    } 
+    else {
       try {
         await addActivity();
         const activity_response = await Axios.get(`http://localhost:3001/host/activity/${hostID}`);
@@ -211,8 +206,7 @@ function CreateActivity() {
 
                 <div className='inline'>
                   <label >Maximum no. of participants</label>
-                  <input type='number' name="capacity" min="2" max="30" value={capacity}
-                    onChange={(event) => handleCapacityChange} required></input>
+                  <input type='number' name="capacity" min="2" max="30" value={capacity} required onChange={(event) => setCapacity(event.target.value)} ></input>
                 </div>
 
                 <div>

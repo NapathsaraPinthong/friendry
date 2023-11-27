@@ -159,7 +159,6 @@ function ActivityList() {
               .filter(val => currentActivity === null || currentActivity.ActivityID !== val.activityID)
               .map((val, key) => {
                 var btnStatus = false;
-                {console.log(val.category)}
                 if (val.Current >= val.capacity)
                   btnStatus = true;
                 if (val.category === tagFilter || tagFilter === 'All') {
