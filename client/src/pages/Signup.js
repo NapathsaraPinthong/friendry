@@ -37,7 +37,7 @@ export default function Signup() {
     }
   }
   return (
-    <div className="container flex">
+    <div className="flex center-box2">
       <div>
         <img className="logo"
           src={logo}
